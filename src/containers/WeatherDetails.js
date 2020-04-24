@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import TodayWeather from "../components/TodayWeather";
 import axios from "axios";
+import Navbar from "../components/Navbar";
+import Input from "../components/Input";
 import WeatherDays from "../components/WeatherDays";
 
 const WeatherDetails = () => {
   const { city } = useParams();
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
   const [daylist, setDaylist] = useState([]);
   const [data, setData] = useState();
   const [error, setError] = useState(false);
@@ -26,7 +29,7 @@ const WeatherDetails = () => {
     });
     return result;
   };
-  useEffect(() => {
+  const retrieveDatafromapi = (city) => {
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apikey}&units=metric`
@@ -41,9 +44,16 @@ const WeatherDetails = () => {
         setError(true);
         setLoading(false);
       });
+  };
+  useEffect(() => {
+    retrieveDatafromapi(city);
   }, []);
   return (
     <div>
+      <Navbar
+        goback={() => history.push("/")}
+        search={<Input onChange={(value) => retrieveDatafromapi(value)} />}
+      />
       {loading ? (
         <h1>loading</h1>
       ) : error ? (
