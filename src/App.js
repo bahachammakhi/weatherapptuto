@@ -20,7 +20,7 @@ function App() {
         isgreen={false}
       />
       <Input onChange={handleonChange} />
-      <Button>Get the weather near me</Button>
+      <Button>Get the weather near me </Button>
       <div style={{ position: "absolute", bottom: "0", right: "10px" }}>
         <Title title={copyright} color="green" isgreen={true} />
       </div>
