@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import Title from "./components/Title";
 import Input from "./components/Input";
+import Button from "./components/Button";
 import "./App.css";
 
 const copyright = "Created by baha";
@@ -19,6 +20,7 @@ function App() {
         isgreen={false}
       />
       <Input onChange={handleonChange} />
+      <Button>Get the weather near me</Button>
       <div style={{ position: "absolute", bottom: "0", right: "10px" }}>
         <Title title={copyright} color="green" isgreen={true} />
       </div>
